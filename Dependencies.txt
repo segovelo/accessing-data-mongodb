@@ -1,0 +1,82 @@
+
+	Maven Dependency in pom.xml file:
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-actuator</artifactId>
+	</dependency>
+
+------------------------------------------------------------------------------------
+	Command Line:
+	curl localhost:8080/actuator/health
+	curl -X POST localhost:8080/actuator/shutdown
+
+
+=========================================================================================
+
+        application.properties file:
+	
+	management.endpoint.shutdown.enabled=true
+	management.endpoints.web.exposure.include=health,info,shutdown
+
+==============================================================================================
+
+Build an executable JAR
+You can run the application from the command line with Gradle or Maven. 
+You can also build a single executable JAR file that contains all the 
+necessary dependencies, classes, and resources and run that. 
+Building an executable jar makes it easy to ship, version, and deploy 
+the service as an application throughout the development lifecycle, 
+across different environments, and so forth.
+
+If you use Gradle, you can run the application by using ./gradlew bootRun. 
+Alternatively, you can build the JAR file by using ./gradlew build and then 
+run the JAR file, as follows:
+
+java -jar build/libs/gs-serving-web-content-0.1.0.jar
+If you use Maven, you can run the application by using
+ ./mvnw spring-boot:run. Alternatively, you can build the JAR file with 
+./mvnw clean package and then run the JAR file, as follows:
+
+java -jar target/gs-serving-web-content-0.1.0.jar
+
+================================================================================
+
+	Rest Command Line
+
+	curl -i -X POST -H "Content-Type:application/json" -d "{  \"firstName\" : \"Frodo\",  \"lastName\" : \"Baggins\" }" http://localhost:8080/people
+	curl http://localhost:8080/people/search/findByLastName?name=Baggins
+	curl -X PUT -H "Content-Type:application/json" -d "{ \"firstName\": \"Bilbo\", \"lastName\": \"Baggins\" }" http://localhost:8080/people/602c09d62959b83aeb78ea3d
+	curl -X PATCH -H "Content-Type:application/json" -d "{ \"lastName\": \"Sunderland\" }" http://localhost:8080/people/602ce3929aea23151ae979e8
+	curl -X DELETE http://localhost:8080/people/602ce3d39aea23151ae979e9
+
+
+======================================================================================
+
+    Node:
+    C:Users\Sebastian> npm i -g json
+
+   curl localhost:8080/employees | json
+
+====================================================================================
+
+	curl -v -X POST localhost:8080/employees -H 'Content-Type:application/json' -d '{"name": "Ernest DeLagrange", "role": "Head of Engineering"}'
+	
+======================================================================
+
+java -jar target/employee-rest-service-0.0.1-SNAPSHOT.jar --trace
+mvn spring-boot:run -Dspring-boot.run.arguments=--logging.level.org.springframework=TRACE,--logging.level.payroll=WARN
+
+
+=================================================================================
+
+MongoDB
+
+To start mongoDB just command line on folder and type "mongod":
+C:\Program Files\MongoDB\Server\4.4\bin>mongod
+
+Alternative
+
+C:\Program Files\MongoDB\Server\4.4\bin>mongod --port 27017 --dbpath C:\MongoDB\data\db
+
+To perform a clean shutdon on mongo processes 
+When running the mongod instance in interactive mode (i.e. without --fork), issue Control-C to perform a clean shutdown.
